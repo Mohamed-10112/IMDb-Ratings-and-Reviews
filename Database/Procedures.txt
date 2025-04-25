@@ -1,0 +1,20 @@
+create or replace procedure GetUserID (UID out number)
+as
+begin
+select max(userid)
+into UID
+from users;
+end;
+
+create or replace procedure GetMovieNames(names out sys_refcursor)
+as
+begin
+    open names for 
+        select moviename from movies;
+end;
+
+create or replace procedure AddReview(movie_id in number, user_id in number, user_review in varchar2) 
+as
+begin
+    insert into reviews values (movie_id, user_id, user_review);
+end;
